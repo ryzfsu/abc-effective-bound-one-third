@@ -2,6 +2,8 @@
 
 Ruiyi Zhang
 
+DOI: [10.5281/zenodo.24202155](https://doi.org/10.5281/zenodo.24202155)
+
 For coprime positive integers `a + b = c`, write `R = rad(abc)`. The manuscript proves
 
     log c < A R^(1/3) exp(-log R / (3000 log log R)),
@@ -31,6 +33,22 @@ construction (Acta Math. 211 (2013)) and Yu's p-adic estimate (Acta Math. 211 (2
     xelatex manuscript.tex
 
 With the supplied `manuscript.bbl`, two XeLaTeX runs suffice.
+
+## Citation
+
+Ruiyi Zhang, *Improving the Stewart-Yu bound for all abc triples*, preprint, Zenodo, 2026. https://doi.org/10.5281/zenodo.24202155
+
+```bibtex
+@misc{zhang2026stewartyu,
+  author    = {Zhang, Ruiyi},
+  title     = {Improving the {Stewart--Yu} bound for all {abc} triples},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint},
+  doi       = {10.5281/zenodo.24202155},
+  url       = {https://doi.org/10.5281/zenodo.24202155}
+}
+```
 
 ## License
 

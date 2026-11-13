@@ -1,0 +1,46 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{1}
+
+\bibitem{Gyory2019}
+K{\'a}lm{\'a}n Gy{\H{o}}ry, \emph{Bounds for the solutions of {$S$}-unit
+  equations and decomposable form equations {II}}, Publ. Math. Debrecen
+  \textbf{94} (2019), no.~3-4, 507--526.
+
+\bibitem{Gyory2020}
+\bysame, \emph{Corrigendum to ``{Bounds for the solutions of {$S$}-unit
+  equations and decomposable form equations II}''}, Publ. Math. Debrecen
+  \textbf{97} (2020), no.~3-4, 525.
+
+\bibitem{Pasten2023arXiv}
+H{\'e}ctor Pasten, \emph{The largest prime factor of {$n^2+1$} and improvements
+  on subexponential {ABC}}, 2023, arXiv:2312.03566v1,
+  \url{https://arxiv.org/abs/2312.03566v1}; published in Invent. Math. 236
+  (2024), 373--385, \url{https://doi.org/10.1007/s00222-024-01244-6}.
+
+\bibitem{Stewart2013}
+C.~L. Stewart, \emph{On divisors of {Lucas} and {Lehmer} numbers}, Acta Math.
+  \textbf{211} (2013), 291--314.
+
+\bibitem{SY1991}
+C.~L. Stewart and Kunrui Yu, \emph{On the {$abc$} conjecture}, Math. Ann.
+  \textbf{291} (1991), 225--230, \url{https://doi.org/10.1007/BF01445201}.
+
+\bibitem{SY2001}
+\bysame, \emph{On the {$abc$} conjecture, {II}}, Duke Math. J. \textbf{108}
+  (2001), no.~1, 169--181, \url{https://doi.org/10.1215/S0012-7094-01-10815-6}.
+
+\bibitem{Yu2007}
+Kunrui Yu, \emph{{$p$}-adic logarithmic forms and group varieties {III}}, Forum
+  Math. \textbf{19} (2007), no.~2, 187--280.
+
+\bibitem{Yu2013}
+\bysame, \emph{{$p$}-adic logarithmic forms and a problem of {Erd\H{o}s}}, Acta
+  Math. \textbf{211} (2013), 315--382.
+
+\end{thebibliography}

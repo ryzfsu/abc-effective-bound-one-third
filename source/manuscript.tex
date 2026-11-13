@@ -1,0 +1,624 @@
+\documentclass{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{fact}{Fact}
+\renewcommand{\thefact}{F\arabic{fact}}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newcommand{\rad}{\operatorname{rad}}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\eps}{\varepsilon}
+\numberwithin{equation}{section}
+\title{Improving the Stewart--Yu bound for all abc triples}
+\hypersetup{pdftitle={Improving the Stewart--Yu bound for all abc triples}}
+\author{Ruiyi Zhang}
+\email{ryzfsu@gmail.com}
+\address{Independent Researcher, Columbia, Maryland, USA}
+\hypersetup{pdfauthor={Ruiyi Zhang}}
+\subjclass[2020]{Primary 11D75; Secondary 11J86, 11D61}
+\keywords{abc conjecture, radical, effective bounds, $p$-adic logarithmic forms}
+\date{November 13, 2026}
+\begin{document}
+\begin{abstract}
+We prove that $\log c<A R^{1/3}\exp(-\log R/(3000\log\log R))$
+for coprime positive integers $a+b=c$, where $R=\operatorname{rad}(abc)$
+and $A$ is absolute and effectively computable.
+The proof combines estimates at maximal prime powers with a growing number
+of auxiliary primes in a rational logarithmic form.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+For positive coprime integers $a+b=c$, put $R=\rad(abc)$.
+The $abc$ conjecture predicts $c<K_\eps R^{1+\eps}$ for every $\eps>0$.
+It remains open.
+Stewart--Yu \cite[p.~226]{SY1991} proved
+$\log c<R^{2/3+C/\log\log R}$ for $c>2$.
+Their later bound \cite[Theorem~1, p.~170]{SY2001} is
+$\log c\ll R^{1/3}(\log R)^3$, effectively.
+We prove the following.
+
+\begin{theorem}\label{thm:main}
+There is an absolute effectively computable $A>0$ such that
+\begin{equation}\label{eq:main}
+\log c<A R^{1/3}\exp\!\left(-\frac{\log R}{3000\log\log R}\right)
+\end{equation}
+for all positive integers $a+b=c$ with $\gcd(a,b)=1$.
+\end{theorem}
+Equivalently, $\log c<A R^{1/3-1/(3000\log\log R)}$, where the exponent tends to $1/3$ from below as $R\to\infty$.
+Except for $(1,1,2)$, one has $R\ge6$ and $\log\log R>0$.
+In particular, $\log c\ll R^{1/3}$ effectively.
+For $R\ge6$, Pasten \cite[Theorem~1.4]{Pasten2023arXiv} bounds $\log c$ by
+$P_{\min}\exp(\kappa_{\rm P}\sqrt{\log R\log\log R})$.
+Here $P_{\min}=\min\{P(a),P(b),P(c)\}$, $P(n)$ is the largest prime factor and $P(1)=1$.
+For $a\le c^{1-\vartheta}$ and fixed $\vartheta>0$, he bounds it by
+$\vartheta^{-1}\exp(\kappa_{\rm P}\sqrt{\log R\log\log R})$,
+with an absolute $\kappa_{\rm P}>0$.
+These improve the bound in restricted regions.
+Neither displayed estimate gives an improvement over the Stewart--Yu bound $\log c\ll R^{1/3}(\log R)^3$ for all triples in terms of $R$ alone.
+
+Put
+\begin{equation}\label{eq:notation}
+H=\log c,\qquad W=\log R,\qquad L=1+W,\qquad X=R^{1/3}.
+\end{equation}
+Let $M_i,s_i,\Delta$ be as in Section~\ref{sec:complement}.
+Let $C_T$ be the effective constant in \eqref{eq:outerconstants} and put
+$C_P=100000C_V$, with $C_V$ defined in \eqref{eq:CV}.
+On $\mathcal N$ in \eqref{eq:N}, we use
+\begin{equation}\label{eq:skeleton}
+H<C_T XL^2\Delta^{-2/9},\qquad
+H<C_P XL^{10}\exp\!\left(-\frac{W}{156\log W}
+                         +\frac{11}3\log\Delta\right).
+\end{equation}
+The second holds for $W\ge W_0$ when $\log\Delta\le(3/1820)W/\log W$.
+At this boundary both rates equal $1/2730>1/3000$.
+Section~\ref{sec:proof} gives an effective common threshold.
+Stewart \cite[Section~4, (4.13)--(4.14)]{Stewart2013} introduced the
+growing auxiliary-prime construction.
+Section~\ref{sec:cap} bounds the cofactors $u_i$ used in applying this
+construction to additive triples.
+For earlier $p$-adic estimates, see \cite{Yu2007}.
+The use of AI tools is described at the end of the paper.
+
+\section{Known estimates}\label{sec:inputs}
+All logarithms are natural.
+Write $\omega(n)$ for the number of distinct prime divisors of $n$,
+with $\omega(1)=0$, and $\pi(x)$ for the number of primes at most $x$.
+For reduced $x/y$, put $h(x/y)=\log\max(|x|,|y|)$.
+Write $T(z)=\max(1,h(z))$ for rational $z$.
+The valuation satisfies $v_p(p)=1$ and $|x|_p=p^{-v_p(x)}$.
+
+\begin{fact}[{\cite[Theorem~1, p.~170, (5)]{SY2001}}]\label{fact:global}
+There is an absolute effectively computable $S\ge1$ such that
+\begin{equation}\label{eq:global}
+H\le S XW^3.
+\end{equation}
+\end{fact}
+
+\begin{fact}[{\cite[Lemma~2, p.~173, and (10), p.~172]{SY2001}}]\label{fact:local}
+For rational $p$-units $\alpha_1,\ldots,\alpha_n$, integer exponents
+$|b_i|\le B_0$, $B_0\ge3$, and $\Theta=\prod_i\alpha_i^{b_i}-1\ne0$,
+\begin{equation}\label{eq:local}
+v_p(\Theta)<\frac p{\log p}(c_9n)^{2n}
+ \prod_i\frac{\max(h(\alpha_i),\log p)}{\log p}\log B_0,
+\end{equation}
+where $c_9>0$ is absolute and effectively computable.
+\end{fact}
+In $K=\Q(\alpha_0)$ of \cite[Section~2, (10)]{SY2001}, the ramification
+index at $p$ is $1$, including $p=2$; hence $\operatorname{ord}_{\mathfrak p}$
+on $\Q$ agrees with $v_p$.
+Independence is not required, and a base $-1$ is allowed.
+
+\begin{fact}[{\cite[Proposition~5, p.~517]{Gyory2019}, corrected in
+\cite{Gyory2020}}]\label{fact:group}
+Put $K_0=300(16e)^8$.
+Let $m\ge1$ and let $\Gamma$ be generated by distinct primes
+$q_1,\ldots,q_m$ and $-1$.
+The primes form a basis for $\Gamma/\Gamma_{\rm tors}$.
+If $\xi\in\Gamma$ and $\xi\ne1,-1$, then
+\begin{align}
+-\log|1-\xi|&<K_0^m\log\max(e,h(\xi))\prod_j\log q_j,\label{eq:real}\\
+-\log|1-\xi|_p&<K_0^m\frac p{\log p}
+ \log\max(e,ph(\xi))\prod_j\log q_j.\label{eq:finite}
+\end{align}
+\end{fact}
+\begin{lemma}[Specialisation of the group estimate]\label{lem:group-specialisation}
+Proposition~5 of \cite{Gyory2019}, with the sign corrected in \cite{Gyory2020},
+gives \eqref{eq:real}--\eqref{eq:finite}
+under the hypotheses of Fact~\ref{fact:group}.
+\end{lemma}
+\begin{proof}
+Apply Proposition~5 of \cite{Gyory2019}, with the sign corrected in \cite{Gyory2020},
+with $K=\Q$ and the parameter $\alpha=1$ in \cite{Gyory2019}.
+The group has positive rank, and $h(\xi)\ge\log2>0$.
+Its constant is $48(16e)^8$ for $m=1$.
+For $m\ge2$, the specialized coefficient
+$2(m+1)\log\max(e,m)(16e)^{3m+5}$ is at most
+$4^m(16e)^{8m}\le\bigl(8(16e)^8\bigr)^m$, since
+$m+1\le2^m$, $\log\max(e,m)\le2^{m-1}$ and $3m+5\le8m$.
+The factor for the real place is at most $F=4/\log2>1$.
+For $m\ge2$, $F\bigl(8(16e)^8\bigr)^m
+\le\bigl((32/\log2)(16e)^8\bigr)^m<K_0^m$.
+For $m=1$, $48F<300$; both comparisons follow from $\log2>2/3$.
+\end{proof}
+
+\begin{fact}[{\cite[Lemma~3.1, pp.~301--302]{Stewart2013};
+\cite[Main theorem, (1.18), p.~321]{Yu2013}}]\label{fact:growing}
+Let $p\ge5$, $n\ge7$, and $\ell=\log p$.
+For independent rational $p$-units $\alpha_i$ and integers $b_i$, not all
+zero, put $B_e=\max(2,|b_1|,\ldots,|b_n|)$.
+If $\prod_i\alpha_i^{b_i}\ne1$, then
+\begin{equation}\label{eq:growing}
+\begin{split}
+v_p\left(\prod_i\alpha_i^{b_i}-1\right)
+<&\ 376\sqrt{n+1}\,[4+\log(n+1)]
+ \left(7e\frac{p-1}{p-2}\right)^n\prod_i h(\alpha_i)\\
+&\cdot\max\left(p(n/\ell)^n,e^n\ell\right)
+ \max\bigl(\log B_e,5.4n(n+1)\bigr).
+\end{split}
+\end{equation}
+\end{fact}
+\begin{lemma}[Specialisation of the growing-rank estimate]\label{lem:growing-specialisation}
+Under the hypotheses of Fact~\ref{fact:growing}, estimate \eqref{eq:growing}
+follows from its cited sources.
+\end{lemma}
+\begin{proof}
+Stewart's derivation uses the constants $1794$ and $5.25$.
+Yu's published rational case has $1790$ and $5.84$; with these constants,
+the bound $G_1\le5.4n(n+1)$ used here holds for $n\ge7$.
+We derive this range directly from Yu~\cite{Yu2013}.
+Use \cite[(1.9), (1.11), (1.13), (1.28), (1.30)--(1.31)]{Yu2013}
+with $d=f=e_{\mathfrak p}=1$ and Yu's parameters
+$q_{\rm Y}=2$, $q_{\rm Y}^{u_{\rm Y}}=2$.
+Relabel a minimum-valuation exponent last, as (1.17) requires.
+We retain $5.84$ throughout and use the upper bound $1790\le1794$.
+Put $Q_n=4+\log(n+1)$ and $M_e=\max(\log B_e,5.4n(n+1))$.
+Then
+\[
+\frac{G_1}{n+1}<4n+6+\log(4n+6)\le5.4n\quad(n\ge7).
+\]
+The last inequality holds at $7$, and its difference increases.
+Since $h(\alpha_i)\ge\log2$ and the auxiliary quantity in
+\cite[(1.15)]{Yu2013} equals $\log2\log3/\log6$,
+the first term of $h^{(1)}$ is at most
+\[
+\log B_e+\log(2\log3/\log6)<\log B_e+\tfrac14<1.001M_e.
+\]
+Yu's additional term $\log B^\circ$, where
+$B^\circ=\min\{|b_i|:b_i\ne0\}$, satisfies
+$\log B^\circ\le\log B_e\le M_e$.
+Hence $h^{(1)}\le\max(1.001M_e,(n+1)\ell)$.
+The saturated residue-group index $\delta(\boldsymbol\alpha)$ is at least $1$.
+Yu's main theorem uses the heights of the original independent tuple
+in both Kummer cases; we only enlarge $p/\delta(\boldsymbol\alpha)$ to $p$.
+Yu's first bound is consequently at most
+\[
+\begin{split}
+&1794\left(7\frac{p-1}{p-2}\right)^n
+ \frac{(n+1)^{n+1}}{2n!\ell^2}\prod_i h(\alpha_i)\\
+&\quad\cdot\max\left(p(n/\ell)^n,e^n\ell\right)
+ \max(Q_n,\ell)\max(1.001M_e,(n+1)\ell).
+\end{split}
+\]
+Use Stirling's inequality
+$(n+1)^{n+1}/n!\le e^{n+1}\sqrt{n+1}/\sqrt{2\pi}$.
+Also $\max(Q_n,\ell)/\ell\le Q_n/\log5$ and
+$\max(1.001M_e,(n+1)\ell)/\ell\le1.001M_e/\log5$.
+Finally,
+\[
+\frac{1.001\cdot1794e}{2\sqrt{2\pi}(\log5)^2}<376.
+\]
+For this comparison one may use
+$e<2.718282$, $\log5>1.609437$, and $\sqrt{2\pi}>2.50662$.
+This gives \eqref{eq:growing} from the published constants for $n\ge7$.
+\end{proof}
+
+Put $C_H=6+\log S$.
+By \eqref{eq:global}, if $h(\xi)\le H$ and $1\le y\le R$, then
+\begin{equation}\label{eq:logheight}
+\log\max(e,yh(\xi))\le C_HL,
+\end{equation}
+since $\log(RH)\le\log S+4W/3+3\log W\le C_HL$ and $C_HL\ge6$.
+For fixed $\gamma>0$, define the effective constants
+\begin{equation}\label{eq:calpha}
+\begin{split}
+U_\gamma&=\left\lceil\max(1,4/\gamma^2,2\log K_0/\gamma)\right\rceil,\\
+C_\gamma&=\prod_{\substack{q<e^{U_\gamma}\\q\ \mathrm{prime}}}
+ \max\left(1,\frac{K_0\max(1,\log q)}{q^\gamma}\right).
+\end{split}
+\end{equation}
+For every squarefree $J$,
+\begin{equation}\label{eq:absorbprimes}
+G(J):=K_0^{\omega(J)}\prod_{q\mid J}\log q\le C_\gamma J^\gamma,
+\qquad G(1)=1.
+\end{equation}
+For $\zeta=\log q\ge U_\gamma$,
+$\log K_0\le\gamma\zeta/2$ and $\log\zeta\le\sqrt\zeta\le\gamma\zeta/2$.
+Multiply over the primes dividing $J$.
+
+\section{Maximal prime powers}\label{sec:complement}
+Arrange $a\le b$.
+For each nonunit side $i\in\{a,b,c\}$, put
+\[
+M_i=\max_{q\mid i}v_q(i),\qquad
+s_i=\min\{q:v_q(i)=M_i\},\qquad
+u_i=i/s_i^{M_i},\qquad E_i=\rad(u_i).
+\]
+By definition, $s_i\nmid u_i$.
+On $a^2>c$, all three sides exceed $\sqrt c$.
+Put
+\[
+x_i=\log s_i,\quad H_i=M_ix_i,\quad
+\Delta=E_aE_bE_c,\quad J_i=\Delta/E_i,\quad \Omega=\log\Delta.
+\]
+Consider the range
+\begin{equation}\label{eq:N}
+\mathcal N=\{a^2>c,\ s_i^{39}>R^{10}\text{ for every }i\}.
+\end{equation}
+On this range,
+\begin{gather}
+R=s_as_bs_c\Delta,\qquad J_aJ_bJ_c=\Delta^2,\label{eq:identities}\\
+\frac{10}{39}W<x_i<\frac{19}{39}W,\quad
+\Omega<\frac9{39}W<x_i,\quad
+\log\rad(i)<\frac{19}{39}W,\quad H_i>\frac5{19}H.\label{eq:comparisons}
+\end{gather}
+We have $x_i\le W-x_j-x_k<19W/39$ and
+$\log\rad(i)\le W-x_j-x_k$; summing the three lower bounds gives
+$\Omega=W-x_a-x_b-x_c<9W/39$.
+Maximality gives
+$H_i\ge x_i\log i/\log\rad(i)>(10/19)\log i>5H/19$.
+Also $R\ge30$, $W>3$ and $W>3L/4$.
+The actual ratios
+\begin{equation}\label{eq:ratios}
+\xi_a=b/c,\qquad\xi_b=a/c,\qquad\xi_c=-a/b
+\end{equation}
+have height at most $H$ and satisfy
+$v_q(1-\xi_i)=v_q(i)$ for $q\mid i$.
+
+Set
+\begin{equation}\label{eq:outerconstants}
+C_U=2C_HC_{1/6},\qquad
+C_S=\frac{2C_HK_0^2C_{1/26}}{(\log2)^2},\qquad
+C_T=\frac{741}{50}C_HK_0^2C_{1/6}.
+\end{equation}
+If $a^2\le c$, apply (F3) at infinity to $\xi=b/c$.
+Here $-\log(1-\xi)\ge H/2$.
+Equations \eqref{eq:logheight}--\eqref{eq:absorbprimes} give
+\begin{equation}\label{eq:U}
+H<C_U XL e^{-W/6}.
+\end{equation}
+This includes unit sides and $a^2=c$.
+If $a^2>c$ and some $s_i^{39}\le R^{10}$, choose
+$p=s_i=\min\{s_a,s_b,s_c\}$; then $p^{39}\le R^{10}$.
+Since $\log i\le M_i\log\rad(i)\le M_iW$ and $\log i>H/2$,
+maximality gives $H<2WH_i/\log p$.
+Apply (F3) to the full off-side prime basis in \eqref{eq:ratios}:
+\[
+H_i<C_HK_0^2C_{1/26}\frac p{\log p}Lx_jx_kJ_i^{1/26}
+ \le C_HK_0^2C_{1/26}\frac p{\log p}L^3R^{1/26}.
+\]
+Since $p\le R^{10/39}=X R^{-1/13}$,
+\begin{equation}\label{eq:S}
+H<C_S XL^4e^{-W/26}.
+\end{equation}
+
+On all of $\mathcal N$, (F3) together with \eqref{eq:absorbprimes},
+with $\gamma=1/6$, gives
+\[
+\begin{gathered}
+\frac{x_jx_k}{x_i}\le\frac{39}{10}W,\qquad
+C_*=\frac{39}{10}C_HK_0^2C_{1/6},\\
+H_i<C_HK_0^2C_{1/6}L\frac{s_i}{x_i}x_jx_kJ_i^{1/6}
+ <C_*s_iL^2J_i^{1/6}.
+\end{gathered}
+\]
+Multiply and use \eqref{eq:identities}--\eqref{eq:comparisons}:
+\begin{equation}\label{eq:thick}
+\prod_iH_i<C_*^3RL^6\Delta^{-2/3},\qquad
+H<C_T XL^2\Delta^{-2/9}.
+\end{equation}
+There is no restriction on $\Delta$ in this estimate.
+
+\section{Cofactors of the maximal prime powers}\label{sec:cap}
+Assume the triple lies in $\mathcal N$.
+Put $\kappa=\max(1,c_9)$ and $F(n)=(\kappa n)^{2n}$.
+Choose an integer $m_0\ge7$ with $\log(m_0+1)\ge8\log\kappa+10$.
+Define
+\begin{equation}\label{eq:CV}
+C_F=\max\left(1,\max_{0\le m<m_0}
+ \frac{F(m+3)}{((m+1)!)^3}\right),\qquad
+C_V=\frac{(C_H+2)C_F}{4(\log2)^3}.
+\end{equation}
+Then $C_V\ge1$, since $C_F\ge F(3)\ge729$.
+For squarefree $J$ with $m=\omega(J)$, one has $J\ge(m+1)!$.
+Integration gives $\log((m+1)!)\ge(m+1)\log(m+1)-m$.
+It follows that
+\[
+\begin{split}
+\log\frac{F(m+3)}{((m+1)!)^3}
+&\le(3-m)\log(m+1)+2(m+3)\log\kappa+3m+4+\frac8{m+1}\\
+&\le m\left[-\tfrac12\log(m+1)+4\log\kappa+5\right]\quad(m\ge7).
+\end{split}
+\]
+The last expression is nonpositive for $m\ge m_0$.
+The finite maximum handles $m<m_0$, including $0$.
+Consequently,
+\begin{equation}\label{eq:factorial}
+F(3+\omega(J))\le C_F J^3.
+\end{equation}
+
+Let $l\mid E_i$.
+Represent $\xi_i$ using $s_j,s_k$, every prime dividing $J_i$, and the sign.
+These bases are $l$-units.
+Their coefficients are at most $B_0=\max(3,H/\log2)$, with
+$\log B_0\le(C_H+2)L$.
+Since $\log l\le\Omega<x_j,x_k$, the two factors for $s_j,s_k$ in
+\eqref{eq:local} have product at most $L^2/[4(\log2)^2]$.
+Each remaining prime contributes
+\[
+\max(1,\log q/\log l)\le\max(1,\log q/\log2)<q.
+\]
+The sign contributes $1$.
+Apply (F2), \eqref{eq:factorial} and $l/\log l\le E_i/\log2$:
+\begin{equation}\label{eq:residual}
+1\le v_l(i)<C_VL^3E_iJ_i^4\le C_VL^3\Delta^4.
+\end{equation}
+Every residual exponent is included, also at $l=2$.
+For distinct sides $j,k$, this yields
+\begin{equation}\label{eq:cofactor}
+T(u_j/u_k)\le C_VL^4\Delta^4.
+\end{equation}
+If $u_j>1$,
+$\log u_j\le\max_{l\mid u_j}v_l(j)\,\Omega$ and $\Omega<W<L$;
+if $u_j=1$, $\log u_j=0$.
+Likewise for $u_k$. Coprimality gives
+$h(u_j/u_k)=\max(\log u_j,\log u_k)$; use $C_V\ge1$ for $T(u_j/u_k)$.
+
+\section{Auxiliary primes in the local estimate}\label{sec:aux}
+\begin{lemma}\label{lem:aux}
+Let $p,q,r$ be distinct primes, $\ell=\log p$, and $\Lambda=\log\ell\ge10^6$.
+Suppose $\ell\le\log q,\log r\le2\ell$.
+Let $w_q,w_r$ be coprime positive integers with
+$\gcd(w_qw_r,pqr)=1$ and $\omega(w_qw_r)\le\ell$.
+For $1\le N_q,N_r\le p^2$, $\sigma\in\{1,-1\}$, and a nonzero difference,
+\begin{equation}\label{eq:auxbound}
+v_p(w_qq^{N_q}-\sigma w_rr^{N_r})
+ <25200p\ell^5T(w_q/w_r)
+                     \exp\!\left(-\frac{\ell}{52\log\ell}\right).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Write $\beta$ for the valuation and $z=(w_q/w_r)q^{N_q}r^{-N_r}>0$.
+If $\beta=0$, the result follows.
+For $\sigma=1$, take $\nu=1$.
+For $\sigma=-1$, take $\nu=2$; oddness gives
+$v_p(z^2-1)=v_p(z+1)=\beta$.
+Hence $\beta=v_p(z^\nu-1)$.
+The denominator is a $p$-unit, and $v_q(z)=N_q>0$ ensures nonvanishing.
+
+Put $n=\lfloor\ell/(52\Lambda)\rfloor$.
+Then $n\ge7$ and $n\ge\ell/(104\Lambda)$.
+Choose auxiliary primes outside $pqrw_qw_r$.
+For $\theta=w_q/w_r\ne1$, use $n-3$ of them and set
+\begin{equation}\label{eq:tuple}
+\begin{aligned}
+\alpha_1&=q/(\varpi_4\cdots \varpi_n),& b_1&=\nu N_q,\\
+\alpha_2&=1/r,& b_2&=\nu N_r,\\
+\alpha_3&=\theta,& b_3&=\nu,\\
+\alpha_i&=\varpi_i\ (i\ge4),& b_i&=\nu N_q.
+\end{aligned}
+\end{equation}
+If $w_q=w_r=1$, omit $\theta$ and use $n-2$ auxiliaries.
+The product is $z^\nu$.
+Take an integer relation $\prod_i\alpha_i^{z_i}=1$.
+The valuations at $q$ and $r$ give $z_1=z_2=0$.
+For $\theta\ne1$, a prime in its support then gives $z_3=0$,
+and each $\varpi_i$ gives $z_i=0$ for $i\ge4$.
+The tuple without $\theta$ is treated in the same way.
+All bases are rational $p$-units.
+
+For $m=\lfloor x/2\rfloor$, Legendre's formula gives
+\[
+\frac{2^{2m}}{2m+1}\le\binom{2m}m\le(2m)^{\pi(2m)}.
+\]
+Each prime contributes at most $2m$ to the binomial coefficient.
+Hence $\pi(x)\log x\ge(x-2)\log2-\log(x+1)$.
+For $x\ge1000$, use $\log2>2/3$ and
+$x/15\ge4/3+\log(x+1)$ to obtain $\pi(x)\ge3x/(5\log x)$.
+At $x=6\ell\log(6\ell)$,
+\begin{equation}\label{eq:primesupply}
+\log x\le1.001\Lambda,\qquad
+\pi(x)\ge\frac{3600}{1001}\ell>3\ell.
+\end{equation}
+Here $\log6+\log(\Lambda+\log6)\le3+\log\Lambda
+\le3+\sqrt\Lambda/2\le0.001\Lambda$.
+There are at most $3+\ell$ forbidden primes, and $n+3<2\ell$.
+Therefore $h(\varpi_i)\le1.001\Lambda$ is possible.
+
+The auxiliary denominator has logarithm at most $1.001n\Lambda<\ell/2$.
+Since $1.001\Lambda\ge1$, we have
+$(1.001\Lambda)^{n-3}\le(1.001\Lambda)^n$;
+the same comparison holds for $n-2$ auxiliaries.
+Therefore,
+\begin{gather}
+\prod_i h(\alpha_i)\le4\ell^2T(w_q/w_r)(1.001\Lambda)^n,\qquad
+B_e\le2p^2,\label{eq:heightproduct}\\
+\max(\log B_e,5.4n(n+1))\le3\ell^2.\label{eq:coefficients}
+\end{gather}
+The cofactor-free tuple satisfies the same bounds.
+Both maximum terms in (F4) are at most $p(n/\ell)^n$, since
+\[
+\log\frac{p(n/\ell)^n}{e^n\ell}
+\ge\ell-\frac{\ell}{52\Lambda}[1+\log(104\Lambda)]-\Lambda\ge0.
+\]
+Here $[1+\log(104\Lambda)]/(52\Lambda)<1/2$ and $\ell/2>\Lambda$.
+For $p\ge1000$,
+\[
+\frac{7e^2(1.001)(p-1)}{52(p-2)}
+\le\frac{7(68/25)^2(1001/1000)(999/998)}{52}<1.
+\]
+That upper bound equals $155615229/155937500<0.998$.
+Consequently,
+\begin{equation}\label{eq:geometric}
+\left[7e\frac{p-1}{p-2}\frac n\ell(1.001\Lambda)\right]^n
+ \le e^{-n}\le e\exp\!\left(-\frac{\ell}{52\Lambda}\right).
+\end{equation}
+Finally, $\sqrt{n+1}[4+\log(n+1)]\le2\ell$.
+Insert \eqref{eq:heightproduct}--\eqref{eq:geometric} into (F4), and use
+$752e\cdot4\cdot3<25200$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+Set
+\begin{equation}\label{eq:rates}
+\tau=\frac3{1820},\quad \eta=\frac1{3000},\quad
+\rho=\frac1{2730},\quad \mu=\rho-\eta=\frac3{91000}>\frac1{40000}.
+\end{equation}
+Define the effective threshold
+\begin{equation}\label{eq:threshold}
+\begin{split}
+t_0=\left\lceil\max\left(1000002,\log(100000C_V),\log C_T,
+ \log C_U,\log C_S,\log\frac{2S}{\log2}\right)\right\rceil,\\
+W_0=e^{t_0},\qquad R_0=e^{W_0}.
+\end{split}
+\end{equation}
+Assume $W\ge W_0$ and put $t=\log W$.
+Then
+\begin{equation}\label{eq:onset}
+t\ge t_0,\qquad\log L\le t+1,\qquad W\ge t^4,\qquad W/t\ge t^3.
+\end{equation}
+First suppose the triple lies in $\mathcal N$ and $\Omega\le\tau W/t$.
+Choose the least $s_i=p$, with the other primes denoted by $q,r$.
+The equation is $c-b=a$, $c-a=b$, or $a+b=c$.
+The local difference in Lemma~\ref{lem:aux} has valuation $\beta=M_i$,
+with cofactors $u_j,u_k$ and the appropriate sign.
+Their supports are coprime and avoid $pqr$.
+By \eqref{eq:comparisons},
+\begin{equation}\label{eq:ellrange}
+\frac{10W}{39}<\ell\le\frac{W-\Omega}3,\qquad
+\ell\le\log q,\log r<\frac{19}{10}\ell<2\ell.
+\end{equation}
+In particular, $t-2<\log\ell\le t$, so $\log\ell\ge10^6$.
+The upper bound for $\ell$ uses
+$p^3\le s_as_bs_c=R/\Delta$, since $p$ is the least of the three primes.
+Also
+\[
+\omega(u_ju_k)\le\Omega/\log2\le2\tau W/t<\ell.
+\]
+Every complete exponent is at most $(S/\log2)e^{W/3}W^3$.
+Its logarithm is at most $W/3+4t<20W/39<2\ell$.
+The middle comparison follows from $4t<7W/39$ in \eqref{eq:onset}.
+Lemma~\ref{lem:aux} applies with exponents at most $p^2$.
+Using \eqref{eq:cofactor} gives
+\begin{equation}\label{eq:beforemonotone}
+H<\frac{19}5\ell\beta
+ <100000C_VL^{10}\Delta^4
+       \exp\!\left(\ell-\frac{\ell}{52\log\ell}\right).
+\end{equation}
+The function $g(x)=x-x/(52\log x)$ increases for $\log x\ge1$.
+Put $Y=(W-\Omega)/3$ and $\chi=\Omega/W$.
+Since $t\chi\le\tau<\log3$,
+\[
+\frac{3Yt}{W}-\log Y=\log3-t\chi-\log(1-\chi)>0,
+\qquad \frac Y{\log Y}\ge\frac W{3t}.
+\]
+Apply this to \eqref{eq:beforemonotone}:
+\begin{equation}\label{eq:pinch}
+\begin{split}
+H&<100000C_VXL^{10}\exp\!\left(-\frac W{156t}+\frac{11}3\Omega\right)\\
+ &\le100000C_VXL^{10}e^{-\rho W/t},
+\end{split}
+\end{equation}
+because
+\begin{equation}\label{eq:balance}
+\frac1{156}-\frac{11}3\tau=\frac{2\tau}9=\rho.
+\end{equation}
+If $\Omega>\tau W/t$, \eqref{eq:thick} gives
+$H<C_T XL^2e^{-\rho W/t}$ on $\mathcal N$.
+The equality $\Omega=\tau W/t$ was included in \eqref{eq:pinch}.
+
+The polynomial factors satisfy
+\begin{align}
+\log(100000C_V)+10\log L&\le11t+10\le\mu t^3\le\mu W/t,\label{eq:localabsorb}\\
+\log C_T+2\log L&\le3t+2\le\mu t^3\le\mu W/t.\label{eq:thickabsorb}
+\end{align}
+Here $\mu>1/40000$ and $t^2/40000>12$.
+This covers the cofactor polynomial, $\ell^5$, the factor $\ell$,
+and all constants in \eqref{eq:beforemonotone}.
+For $a^2\le c$, or $a^2>c$ with some $s_i^{39}\le R^{10}$,
+\eqref{eq:onset} gives
+\begin{align}
+W/6-\eta W/t&\ge W/12\ge2t+1\ge\log C_U+\log L,\label{eq:Uabsorb}\\
+W/26-\eta W/t&\ge W/52\ge5t+4\ge\log C_S+4\log L.\label{eq:Sabsorb}
+\end{align}
+Here $\eta/t\le1/52$ and $\eta/t\le1/12$.
+Equations \eqref{eq:U}, \eqref{eq:S}, and
+\eqref{eq:localabsorb}--\eqref{eq:Sabsorb} prove
+$H<Xe^{-\eta W/\log W}$ for $W\ge W_0$.
+
+It remains to cover the finite range.
+Apart from $(1,1,2)$, at least two distinct primes divide $abc$.
+Hence $R\ge6$.
+Define
+\begin{equation}\label{eq:A}
+E_0=\max\left(\frac{\log6}{\log\log6},\frac{W_0}{t_0}\right),\qquad
+A=2\max\left(1,S W_0^3e^{\eta E_0}\right).
+\end{equation}
+The function $W/\log W$ has a unique minimum at $W=e$.
+Its maximum on $[\log6,W_0]$ is therefore $E_0$.
+For $6\le R<R_0$, (F1) yields
+\[
+H\le SXW^3\le S W_0^3e^{\eta E_0}Xe^{-\eta W/\log W}
+ <AXe^{-\eta W/\log W}.
+\]
+For $(1,1,2)$, $H<1<X$ and $\log\log2<0$.
+Hence \eqref{eq:main} also holds there.
+\qed
+
+After omitting the cofactor-height and polynomial factors, the formal
+endpoint $\ell=W/3$ in \eqref{eq:auxbound} gives
+\[
+X\exp\!\left(-\frac{W}{156\log(W/3)}\right)
+=X\exp\!\left(-\left(\frac1{156}+o(1)\right)
+                       \frac{W}{\log W}\right)
+\qquad(W\to\infty).
+\]
+Its leading coefficient is $1/156$, whereas Theorem~\ref{thm:main} uses $1/3000$.
+
+\section*{Use of AI tools}
+
+The author devised the method of proof. Codex (OpenAI, GPT-6 Astra) and
+Antigravity (Google, Gemini 4 Carbon) carried out numerical checks and ran
+blind reviews of the manuscript. Claude Code (Anthropic, Claude Fable 5)
+checked the proofs and the references. The author checked every step of the
+proof and every reference, and takes full responsibility for the content of
+the paper.
+
+\section*{Statements and declarations}
+
+\textbf{Competing interests.} The author has no competing interests.
+
+\textbf{Funding.} No funding was received for this work.
+
+% Local bibliography and end-address spacing only; retain the standard 8pt font.
+\renewcommand{\bibliofont}{\footnotesize\setlength{\baselineskip}{9pt}}
+\makeatletter
+\renewcommand{\@bibtitlestyle}{%
+  \@startsection{section}{1}{\z@}{4pt}{3pt}%
+    {\normalfont\scshape\centering}*{\refname}}
+\renewcommand{\@setaddresses}{\par\nobreak\begingroup
+  \footnotesize
+  \def\author##1{}%
+  \def\email##1##2{\@ifnotempty{##2}{\textit{\emailaddrname}:\space
+    \texttt{##2}}}%
+  \def\address##1##2{\@ifnotempty{##2}{\unskip\quad
+    {\scshape\ignorespaces##2\unskip}}}%
+  \noindent\addresses\par\endgroup}
+\makeatother
+\bibliographystyle{amsplain}
+\bibliography{references}
+\end{document}
